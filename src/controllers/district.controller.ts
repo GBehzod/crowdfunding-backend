@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { bulkCreateDistrictsService, createDistrictService, getDistrictsService } from "../services/district.service";
+import { createDistrictService, getDistrictsService } from "../services/district.service";
 import { getRegionService } from "../services/region.service";
 
 export const getDistrictsHandler = async (req: Request, res: Response) => {
