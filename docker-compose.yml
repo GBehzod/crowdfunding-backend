@@ -1,5 +1,18 @@
 version: '3'
 services:
+  backend:
+   build: .
+   ports:
+      - '8007:8007'
+   env_file:
+      - ./.env
+   volumes:
+      # - "./uploads:/var/www/app/uploads"
+      - "./logs:/var/www/app/logs"
+   depends_on:
+      - postgres
+      - redis
+
   postgres:
     image: postgres:latest
     container_name: crowdfunding_postgres
@@ -9,6 +22,8 @@ services:
       - crowdfundingDB:/var/lib/postgresql/data
     env_file:
       - ./.env
+    # networks:
+    #   - crowd_network
 
   redis:
     image: redis:alpine
@@ -17,6 +32,8 @@ services:
       - '6379:6379'
     volumes:
       - crowdfundingRedisDB:/data
+    # networks:
+    #   - crowd_network
 volumes:
   crowdfundingDB:
   crowdfundingRedisDB:
